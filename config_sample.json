@@ -1,0 +1,9 @@
+{
+    "bot_token":"",
+    "base_chat":0,
+    "group_link":"",
+    "admin_chat":0,
+    "sudo_users":[],
+    "mongo_uri":""
+}
+    
