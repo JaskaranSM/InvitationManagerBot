@@ -14,7 +14,7 @@ async def startPhase(message):
         return await message.reply(f"Join my group first : {config.get('group_link')}")
 
     await message.reply("Send your EMAIL-ID.")
-old= r"^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$"
+    
 @dp.message_handler(bannedUserFilter,isChatPrivate,regexp=r"^[a-z0-9]+[\._]?[a-z0-9]+[@]gmail.com")
 async def emailPhase(message):
     user = message.from_user 
