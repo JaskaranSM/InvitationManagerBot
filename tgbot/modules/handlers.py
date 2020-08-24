@@ -17,7 +17,7 @@ async def startPhase(message):
 
     await message.reply("Send your EMAIL-ID.")
     
-@dp.message_handler(bannedUserFilter,isChatPrivate,regexp=r"^[a-z0-9]+[\._]?[a-z0-9]+[@]gmail.com")
+@dp.message_handler(bannedUserFilter,isChatPrivate,regexp=r"^([\d\w]+[\._]?[\d\w]+)*[@]gmail.com")
 async def emailPhase(message):
     user = message.from_user 
     LOGGER.info(f"Email from : {user.id} | {user.first_name}")
