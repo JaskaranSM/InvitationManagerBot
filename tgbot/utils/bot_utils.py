@@ -4,7 +4,7 @@ async def isUserMember(userId):
     LOGGER.info(f"Checking if {userId} is in our kholi!")
     try:
         member = await bot.get_chat_member(config.get("base_chat"),userId)
-        if member.status == "left":
+        if member.status == "left" or member.status == "kicked":
             return False
     except Exception as e:
         LOGGER.error(e)

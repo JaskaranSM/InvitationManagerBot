@@ -11,6 +11,7 @@ db_client = getClient(config.get('mongo_uri'))
 db = db_client['test']
 
 bannedUserDb = db.bannedUserDb
+accessUserDb = db.accessUserDb
 
 
 async def addBanUser(userId):
@@ -33,6 +34,28 @@ async def removeBanUser(userId):
         LOGGER.error(e)
         return False 
     BANNED_USERS.remove(userId)
+    return True
+
+async def addAccessUser(userId,email):
+    LOGGER.info(f"Adding {userId} : {email}")
+    try:
+        result = await accessUserDb.insert_one({"userId":userId,"email":email})
+        LOGGER.info(result)
+    except Exception as e:
+        LOGGER.error(e)
+        return False 
+    return True
+
+async def isUserInDb(userId):
+    LOGGER.info(f"Checking {userId} in db")
+    try:
+        result = await accessUserDb.find_one({"userId":userId})
+        LOGGER.info(result)
+        if result is None:
+            return False
+    except Exception as e:
+        LOGGER.error(e)
+        return False
     return True
 
 async def getAllBannedUsers():
